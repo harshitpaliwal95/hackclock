@@ -14,11 +14,9 @@ export const Clock = () => {
     if (e.type === "blur") setUpdateInput(!updateInput);
   };
 
-  console.log(time);
   useEffect(() => {
     const timer = setInterval(() => {
       if (watchStatus === "blur") {
-        console.log("runing");
         setTime((prevTime) => {
           const seconds = (prevTime.seconds + 1) % 60;
           const minutes =
@@ -120,7 +118,6 @@ export const Clock = () => {
               onBlur={blurHandler}
               placeholder={time.minutes}
               key={updateInput}
-              //   value={time.minutes}
             ></input>
           </div>
           <div className="hr-input">
@@ -138,7 +135,6 @@ export const Clock = () => {
               placeholder={time.seconds}
               type="text"
               name="hr"
-              //   value={time.seconds}
             ></input>
           </div>
         </div>

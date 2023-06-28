@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 export const Clock = () => {
-  //   const [currentTime, setCurrentTime] = useState(new Date());
-
-  //   useEffect(() => {
-  //     const timer = setInterval(() => {
-  //       setCurrentTime(new Date());
-  //     }, 1000);
-
-  //     return () => clearInterval(timer);
-  //   }, []);
-
-  //   const [time, setTime] = useState({
-  //     minutes: currentTime.getMinutes(),
-  //     seconds: currentTime.getSeconds(),
-  //   });
   const [time, setTime] = useState({
     minutes: 0,
     seconds: 0,
@@ -28,9 +14,11 @@ export const Clock = () => {
     if (e.type === "blur") setUpdateInput(!updateInput);
   };
 
+  console.log(time);
   useEffect(() => {
     const timer = setInterval(() => {
       if (watchStatus === "blur") {
+        console.log("runing");
         setTime((prevTime) => {
           const seconds = (prevTime.seconds + 1) % 60;
           const minutes =
@@ -121,7 +109,10 @@ export const Clock = () => {
             <label for="min">Minutes</label>
             <input
               onChange={(e) =>
-                setTime((time) => ({ ...time, minutes: e.target.value }))
+                setTime((time) => ({
+                  ...time,
+                  minutes: Number(e.target.value),
+                }))
               }
               type="text"
               name="min"
@@ -136,7 +127,10 @@ export const Clock = () => {
             <label for="hr">Seconds</label>
             <input
               onChange={(e) =>
-                setTime((time) => ({ ...time, seconds: e.target.value }))
+                setTime((time) => ({
+                  ...time,
+                  seconds: Number(e.target.value),
+                }))
               }
               onFocus={blurHandler}
               onBlur={blurHandler}

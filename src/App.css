@@ -1,124 +1,95 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
-.App {
+
+.mainbox {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gamut__timePicker {
+  border: 1px solid gray;
+  width: 300px;
+  height: 335px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
   font-family: sans-serif;
 }
 
-.clock {
-  width: 300px;
-  height: 300px;
+.gamut__timePicker__clockWrapper {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  align-self: stretch;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+}
+
+.gamut__timePicker__clock {
   border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
   box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
-  font-size: 24px;
-  color: #444;
-  text-align: center;
+  margin: 0 auto;
+  position: relative;
 }
 
-.clock::after {
-  background: #aaa;
-  content: "";
-  width: 12px;
-  height: 12px;
+.gamut__timePicker__labels {
   border-radius: 50%;
+  width: 210px;
+  height: 210px;
+  margin: 0 auto;
   position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #fff;
+  pointer-events: none;
+  z-index: -111;
 }
 
-.min_hand {
+.gamut__timePicker__labels--hourLabel {
   position: absolute;
-  width: 4px;
-  height: 80px;
-  background: #444;
-  top: 22.5%;
-  left: 49%;
-  transform-origin: bottom;
+  -webkit-transform: translate(-50%, -45%);
+  transform: translate(-50%, -45%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.sec_hand {
-  position: absolute;
-  width: 2px;
-  height: 118px;
+.gamut__timePicker__minHand {
+  width: 5px;
+  height: 100px;
+  /* height: 118px; */
   background: red;
-  top: 10.5%;
-  left: 50%;
-  transform-origin: bottom;
-}
-
-.clock span {
+  background-size: 100% 100%;
   position: absolute;
-  font-family: "Source Sans Pro", sans-serif;
-  font-weight: 700;
+  -webkit-transform-origin: 49% 92%;
+  transform-origin: 49% 92%;
+  top: 15%;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
-.twelve {
-  top: 10px;
-  left: 46%;
-}
-
-.one {
-  top: 10%;
-  right: 26%;
-}
-
-.eleven {
-  top: 10%;
-  left: 26%;
-}
-
-.two {
-  top: 25%;
-  right: 10%;
-}
-
-.three {
-  right: 10px;
-  top: 46%;
-}
-
-.four {
-  right: 30px;
-  top: 67%;
-}
-
-.five {
-  right: 78px;
-  top: 80%;
-}
-
-.six {
-  bottom: 10px;
-  left: 50%;
-}
-
-.seven {
-  left: 80px;
-  top: 82%;
-}
-
-.eight {
-  left: 30px;
-  top: 67%;
-}
-
-.nine {
-  left: 10px;
-  top: 46%;
-}
-
-.ten {
-  top: 25%;
-  left: 10%;
-}
-.time-input {
+.gamut__timePicker__hrHand {
+  width: 5px;
+  height: 70px;
+  background: black;
+  background-size: 100% 100%;
   position: absolute;
-  bottom: -114px;
+  -webkit-transform-origin: 50% 93%;
+  transform-origin: 50% 93%;
+  top: 25%;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  cursor: -webkit-grab;
+  cursor: grab;
 }
 
 input {

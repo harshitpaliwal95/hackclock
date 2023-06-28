@@ -49,6 +49,12 @@
   position: absolute;
   pointer-events: none;
   z-index: -111;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 .gamut__timePicker__labels--hourLabel {
@@ -90,6 +96,14 @@
   transform: rotate(0deg);
   cursor: -webkit-grab;
   cursor: grab;
+}
+.time-input {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 input {

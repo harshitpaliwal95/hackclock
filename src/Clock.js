@@ -47,24 +47,27 @@ export const Clock = () => {
     const radius = 252 / 2;
 
     const rotateHandler = (e) => {
-      const rect = e.target.getBoundingClientRect();
-      const radius = rect.width / 2;
-      const centerX = rect.left + radius;
-      const centerY = rect.top + radius;
-      if (type === "min") {
-        const radians = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-        let angle = radians * (180 / Math.PI);
-        angle = angle < 0 ? angle + 360 : angle;
+      if (rotating) {
+        const rect = e.target.getBoundingClientRect();
+        const radius = rect.width / 2;
+        const centerX = rect.left + radius;
+        const centerY = rect.top + radius;
 
-        const minute = Math.floor(angle / 6) % 60;
-        setTime((time) => ({ ...time, minutes: minute }));
-      } else {
-        const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-        const seconds = Math.round((angle * 180) / Math.PI / 6);
-        setTime((time) => ({
-          ...time,
-          seconds: seconds < 0 ? seconds + 60 : seconds,
-        }));
+        if (type === "min") {
+          const radians = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+          let angle = radians * (180 / Math.PI);
+          angle = angle < 0 ? angle + 360 : angle;
+
+          const minute = Math.floor(angle / 6) % 60;
+          setTime((time) => ({ ...time, minutes: minute }));
+        } else {
+          const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+          const seconds = Math.round((angle * 180) / Math.PI / 6);
+          setTime((time) => ({
+            ...time,
+            seconds: seconds < 0 ? seconds + 60 : seconds,
+          }));
+        }
       }
     };
 
@@ -160,7 +163,7 @@ export const Clock = () => {
           <div
             className="gamut__timePicker__minHand"
             style={{
-              transform: `rotateZ(${time.seconds * 6}deg)`,
+              transform: `rotate(${time.seconds * 6}deg)`,
             }}
             onMouseDown={(e) =>
               document.addEventListener("mousemove", rotateHand(e, "sec"))
@@ -169,7 +172,7 @@ export const Clock = () => {
           <div
             className="gamut__timePicker__hrHand"
             style={{
-              transform: `rotateZ(${time.minutes * 6}deg)`,
+              transform: `rotate(${time.minutes * 6}deg)`,
             }}
             onMouseDown={(e) =>
               document.addEventListener("mousemove", rotateHand(e, "min"))

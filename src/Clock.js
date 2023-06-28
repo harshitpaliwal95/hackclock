@@ -13,6 +13,13 @@ export const Clock = () => {
     setWatchStatus(e.type);
     if (e.type === "blur") setUpdateInput(!updateInput);
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      // 👇 Get input value
+      setUpdateInput(!updateInput);
+      setWatchStatus("blur");
+    }
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -112,6 +119,7 @@ export const Clock = () => {
                   minutes: Number(e.target.value),
                 }))
               }
+              onKeyDown={handleKeyDown}
               type="text"
               name="min"
               onFocus={blurHandler}
@@ -129,6 +137,7 @@ export const Clock = () => {
                   seconds: Number(e.target.value),
                 }))
               }
+              onKeyDown={handleKeyDown}
               onFocus={blurHandler}
               onBlur={blurHandler}
               key={updateInput}

@@ -54,13 +54,13 @@ export const Clock = () => {
         angle = angle < 0 ? angle + 360 : angle;
 
         const minute = Math.floor(angle / 6) % 60;
-        setTime((time) => ({ ...time, minutes: minute }));
+        setTime((time) => ({ ...time, minutes: minute + 12 }));
       } else {
         const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
         const seconds = Math.round((angle * 180) / Math.PI / 6);
         setTime((time) => ({
           ...time,
-          seconds: seconds < 0 ? seconds + 60 : seconds,
+          seconds: (seconds < 0 ? seconds + 60 : seconds) + 12,
         }));
       }
     };

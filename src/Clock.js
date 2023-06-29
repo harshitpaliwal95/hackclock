@@ -40,44 +40,39 @@ export const Clock = () => {
   }, [watchStatus]);
 
   const rotateHand = (event, type) => {
-    const elem = event.target;
-    elem.style.cursor = "grabbing";
-    let rotating = true;
-    const clock = document.querySelector(".gamut__timePicker__clock");
-    const radius = 252 / 2;
-
     const rotateHandler = (e) => {
-      if (rotating) {
-        const rect = e.target.getBoundingClientRect();
-        const radius = rect.width / 2;
-        const centerX = rect.left + radius;
-        const centerY = rect.top + radius;
+      e.preventDefault();
 
-        if (type === "min") {
-          const radians = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-          let angle = radians * (180 / Math.PI);
-          angle = angle < 0 ? angle + 360 : angle;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
 
-          const minute = Math.floor(angle / 6) % 60;
-          setTime((time) => ({ ...time, minutes: minute }));
-        } else {
-          const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-          const seconds = Math.round((angle * 180) / Math.PI / 6);
-          setTime((time) => ({
-            ...time,
-            seconds: seconds < 0 ? seconds + 60 : seconds,
-          }));
-        }
+      if (type === "min") {
+        const radians = Math.atan2(mouseY - centerY, mouseX - centerX);
+        let angle = radians * (180 / Math.PI);
+        angle = angle < 0 ? angle + 360 : angle;
+
+        const minute = Math.floor(angle / 6) % 60;
+        setTime((time) => ({ ...time, minutes: minute }));
+      } else {
+        const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
+        const seconds = Math.round((angle * 180) / Math.PI / 6);
+        setTime((time) => ({
+          ...time,
+          seconds: seconds < 0 ? seconds + 60 : seconds,
+        }));
       }
     };
 
-    document.addEventListener("mousemove", rotateHandler);
-    const cancelRotate = (event) => {
-      elem.style.cursor = "grab";
-      rotating = !rotating;
+    const cancelRotate = () => {
+      document.body.style.cursor = "auto";
       document.removeEventListener("mousemove", rotateHandler);
       document.removeEventListener("mouseup", cancelRotate);
     };
+
+    document.body.style.cursor = "grabbing";
+    document.addEventListener("mousemove", rotateHandler);
     document.addEventListener("mouseup", cancelRotate);
   };
 
